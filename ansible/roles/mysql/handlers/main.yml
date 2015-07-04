@@ -1,0 +1,6 @@
+---
+
+- name: restart mysql
+  become: yes
+  become_method: sudo
+  service: name=mariadb state=started enabled=yes

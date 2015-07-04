@@ -1,0 +1,26 @@
+---
+
+- name: ensure no anonymous mysql user
+  mysql_user: name="" host={{ item }} state=absent
+  with_items:
+    - localhost
+    - localhost.localdomain
+
+- name: remove mysql test database
+  mysql_db: name=test state=absent
+
+- name: create mysql root pass
+  command: /usr/bin/openssl rand -base64 16
+  register: mysql_root_passwd
+ 
+- name: update mysql root passwd
+  mysql_user: name=root host={{ item }} password={{ mysql_root_passwd.stdout }}
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+ 
+- name: copy user my.cnf file with root passwd credentials
+  template: src=dotmy.cnf.j2 dest=/home/vagrant/.my.cnf owner=vagrant group=vagrant mode=0600
+ 
+ 

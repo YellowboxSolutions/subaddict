@@ -1,0 +1,11 @@
+---
+
+- name: Ensure MySQL installed
+  become: yes
+  become_method: sudo
+  yum: name={{ item }} state=present
+  with_items:
+    - mariadb
+    - mariadb-server
+    - MySQL-python
+  notify: restart mysql

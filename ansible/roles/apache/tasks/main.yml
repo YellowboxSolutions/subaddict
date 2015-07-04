@@ -1,0 +1,8 @@
+---
+
+- name: Ensure Apache installed
+  become: yes
+  become_method: sudo
+  yum: name=httpd state=present
+  notify: restart apache
+
