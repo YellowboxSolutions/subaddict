@@ -8,6 +8,18 @@ symbolic-links=0
 # customize your systemd unit file for mariadb according to the
 # instructions in http://fedoraproject.org/wiki/Systemd
 
+
+bind-address = 127.0.0.1
+
+query-cache-size = {{ query_cache_size }}M
+max-heap-table-size = {{ max_heap_table_size }}M
+tmp-table-size = {{ tmp_table_size }}M
+max-connections = {{ max_connections }}
+key-buffer-size = {{ key_buffer_size }}M
+myisam-sort-buffer-size = {{ myisam_sort_buffer_size }}M
+innodb-buffer-pool-size = {{ innodb_buffer_pool_size }}M
+innodb-log-buffer-size = {{ innodb_log_buffer_size }}M
+
 [mysqld_safe]
 log-error=/var/log/mariadb/mariadb.log
 pid-file=/var/run/mariadb/mariadb.pid
