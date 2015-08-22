@@ -8,10 +8,14 @@
     - mariadb
     - mariadb-server
     - MySQL-python
-  notify: restart mysql
 
 - name: Copy /etc/my.cnf
   become: yes
   become_method: sudo
   template: src=my.cnf.j2 dest=/etc/my.cnf
   notify: restart mysql
+
+- name: Start MySQL service
+  become: yes
+  become_method: sudo
+  service: name=mariadb state=started enabled=yes
