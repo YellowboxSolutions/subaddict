@@ -1,0 +1,13 @@
+<h1>View Service Points</h1>
+<table>
+	<tr>
+		<th>Agreement Number</th>
+		<th>Service Point Name</th>
+	</tr>
+{% for service_point in service_points %}
+	<tr>
+		<td><a href="{{ url_for('sp_view', id=service_point.id) }}">{{ service_point.agreement_number }}</a></td>
+		<td>{{ service_point.service_point }}</td>
+	</tr>
+{% endfor %}
+</table>
